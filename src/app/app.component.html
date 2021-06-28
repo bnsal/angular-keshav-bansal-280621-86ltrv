@@ -1,4 +1,56 @@
-<hello name="{{ name }}"></hello>
-<p>
-  Start editing to see some magic happen :)
-</p>
+<h1>Candidates</h1>
+
+<form [formGroup]="filterForm">
+  <input type="checkbox" formControlName="female" value="Female"> Female
+  <input type="checkbox" formControlName="male" value="Male"> Male
+  <input type="text" formControlName="q" placeholder="Whom are you looking for.">
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Gender</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <ng-container *ngFor="let user of users">
+      <tr *ngIf="user.visibile">
+        <td>{{ user.id }}</td>
+        <td>{{ user.first_name }}</td>
+        <td>{{ user.last_name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.gender }}</td>
+      </tr>
+    </ng-container>
+
+  </tbody>
+
+</table>
+
+<br />
+<hr />
+
+<form [formGroup]="userForm">
+
+  <h2>Add New Candidate</h2>
+
+  <input type="text" formControlName="first_name" placeholder="First Name"> &nbsp;
+  <input type="text" formControlName="last_name" placeholder="Last Name">
+  <br /><br />
+
+  <input type="email" formControlName="email" placeholder="Email">
+  <br /><br />
+
+  <div>Gender</div>
+  <input type="radio" formControlName="gender" value="Female"> Female
+  <input type="radio" formControlName="gender" value="Male"> Male
+
+  <button (click)="addNewUser()">Add</button>
+
+</form>
